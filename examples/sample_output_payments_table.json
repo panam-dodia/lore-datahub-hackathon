@@ -1,0 +1,30 @@
+{
+  "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+  "asset_name": "payments.transactions",
+  "why_it_exists": "Created in Q2 2022 to support EU PSD2 regulatory reporting. Consolidates payment events from three upstream sources (Stripe, Braintree, legacy Oracle). The denormalized structure was a deliberate performance decision — joins were causing 40s dashboard load times.",
+  "known_quirks": "settlement_date is always NULL for cryptocurrency transactions — this is intentional and tracked in JIRA-8823. The 'status' column uses a non-standard enum ('COMPLETE' not 'COMPLETED') due to a legacy Oracle migration constraint that was never cleaned up.",
+  "business_context": "Directly feeds the CFO dashboard and the monthly regulatory report to the ECB. Any schema change requires a two-week notice period per our data contract with the Finance team.",
+  "confidence": 0.91,
+  "confidence_level": "HIGH",
+  "knowledge_authors": ["sarah.chen", "marcus.obi"],
+  "evidence": [
+    {
+      "type": "pr_comment",
+      "url": "https://github.com/example-org/data-platform/pull/847",
+      "author": "sarah.chen",
+      "timestamp": "2022-05-12T14:03:00Z",
+      "raw_excerpt": "Making settlement_date nullable for crypto — this is intentional, see JIRA-8823 for context",
+      "relevance_score": 0.95
+    },
+    {
+      "type": "pr_comment",
+      "url": "https://github.com/example-org/data-platform/pull/851#discussion_r123456",
+      "author": "marcus.obi",
+      "timestamp": "2022-06-02T09:14:00Z",
+      "raw_excerpt": "Reminder that any changes to the transactions table need 2 weeks heads up with Finance. They have a hard dependency for the ECB report.",
+      "relevance_score": 0.88
+    }
+  ],
+  "synthesized_at": "2026-08-01T09:12:00Z",
+  "written_to_datahub": true
+}

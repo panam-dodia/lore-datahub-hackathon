@@ -1,0 +1,31 @@
+# Optional convenience wrapper. DataHub itself is best managed via the
+# `datahub docker quickstart` CLI (see README) — this file only wires up
+# Lore's own backend + frontend for local development against an
+# already-running DataHub instance.
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+    command: python main.py
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      - VITE_API_URL=http://localhost:${BACKEND_PORT:-8000}
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host
+    depends_on:
+      - backend

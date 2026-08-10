@@ -1,0 +1,38 @@
+{
+  "nodes": [
+    {
+      "urn": "urn:li:dataJob:(urn:li:dataFlow:(airflow,payments_ingestion,PROD),import_payments_to_snowflake)",
+      "name": "import_payments_to_snowflake",
+      "platform": "dataJob"
+    },
+    {
+      "urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+      "name": "payments.transactions",
+      "platform": "snowflake"
+    },
+    {
+      "urn": "urn:li:dataset:(urn:li:dataPlatform:dbt,payments.transactions,PROD)",
+      "name": "payments.transactions",
+      "platform": "dbt"
+    },
+    {
+      "urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,finance.revenue_report,PROD)",
+      "name": "finance.revenue_report",
+      "platform": "snowflake"
+    }
+  ],
+  "edges": [
+    {
+      "source": "urn:li:dataJob:(urn:li:dataFlow:(airflow,payments_ingestion,PROD),import_payments_to_snowflake)",
+      "target": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)"
+    },
+    {
+      "source": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+      "target": "urn:li:dataset:(urn:li:dataPlatform:dbt,payments.transactions,PROD)"
+    },
+    {
+      "source": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+      "target": "urn:li:dataset:(urn:li:dataPlatform:snowflake,finance.revenue_report,PROD)"
+    }
+  ]
+}

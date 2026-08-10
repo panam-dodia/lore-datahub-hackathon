@@ -1,0 +1,51 @@
+{
+  "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+  "asset_name": "payments.transactions",
+  "platform": "snowflake",
+  "risk": {
+    "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+    "asset_name": "payments.transactions",
+    "asset_type": "TABLE",
+    "platform": "snowflake",
+    "risk_level": "AT_RISK",
+    "risk_score": 0.62,
+    "downstream_consumer_count": 8,
+    "documentation_coverage": 0.0,
+    "last_owner_activity_days": 0,
+    "sole_owner": true,
+    "risk_reasons": [
+      "8 downstream consumers depend on this asset",
+      "No documentation on file",
+      "Single owner (sarah.chen) — no backup registered"
+    ]
+  },
+  "upstream": [
+    {
+      "urn": "urn:li:dataJob:(urn:li:dataFlow:(airflow,payments_ingestion,PROD),import_payments_to_snowflake)",
+      "name": "import_payments_to_snowflake",
+      "platform": "dataJob"
+    }
+  ],
+  "downstream": [
+    {
+      "urn": "urn:li:dataset:(urn:li:dataPlatform:dbt,payments.transactions,PROD)",
+      "name": "payments.transactions",
+      "platform": "dbt"
+    },
+    {
+      "urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,finance.revenue_report,PROD)",
+      "name": "finance.revenue_report",
+      "platform": "snowflake"
+    }
+  ],
+  "evidence": [
+    {
+      "type": "pr_comment",
+      "url": "https://github.com/example-org/data-platform/pull/847",
+      "author": "sarah.chen",
+      "timestamp": "2022-05-12T14:03:00Z",
+      "raw_excerpt": "Making settlement_date nullable for crypto — this is intentional, see JIRA-8823 for context",
+      "relevance_score": 0.95
+    }
+  ]
+}

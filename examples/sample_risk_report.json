@@ -1,0 +1,47 @@
+[
+  {
+    "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,payments.transactions,PROD)",
+    "asset_name": "payments.transactions",
+    "asset_type": "TABLE",
+    "platform": "snowflake",
+    "risk_level": "CRITICAL",
+    "risk_score": 0.87,
+    "downstream_consumer_count": 8,
+    "documentation_coverage": 0.0,
+    "last_owner_activity_days": 142,
+    "sole_owner": true,
+    "risk_reasons": [
+      "8 downstream consumers depend on this asset",
+      "No documentation on file",
+      "Single owner (sarah.chen) — no backup registered"
+    ]
+  },
+  {
+    "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:dbt,analytics.churn_risk_scores,PROD)",
+    "asset_name": "analytics.churn_risk_scores",
+    "asset_type": "PIPELINE",
+    "platform": "dbt",
+    "risk_level": "AT_RISK",
+    "risk_score": 0.61,
+    "downstream_consumer_count": 3,
+    "documentation_coverage": 0.3,
+    "last_owner_activity_days": 45,
+    "sole_owner": true,
+    "risk_reasons": [
+      "Single owner (priya.nair) — no backup registered"
+    ]
+  },
+  {
+    "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:looker,dashboards.exec_summary,PROD)",
+    "asset_name": "dashboards.exec_summary",
+    "asset_type": "DASHBOARD",
+    "platform": "looker",
+    "risk_level": "SAFE",
+    "risk_score": 0.22,
+    "downstream_consumer_count": 1,
+    "documentation_coverage": 0.9,
+    "last_owner_activity_days": 5,
+    "sole_owner": false,
+    "risk_reasons": []
+  }
+]

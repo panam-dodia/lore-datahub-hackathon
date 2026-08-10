@@ -1,0 +1,30 @@
+{
+  "asset_urn": "urn:li:dataset:(urn:li:dataPlatform:dbt,analytics.churn_risk_scores,PROD)",
+  "asset_name": "analytics.churn_risk_scores",
+  "why_it_exists": "Built in late 2023 after the growth team lost visibility into at-risk enterprise accounts following the CRM migration. Runs nightly at 3am to avoid overlapping with the CRM's own ETL window, which was silently corrupting reads earlier in the day.",
+  "known_quirks": "The 3am run time is a workaround, not a design choice — running before 3am causes the upstream `crm.accounts` table to return partial rows during the CRM vendor's own sync window. score column is always 0 (not null) for accounts younger than 30 days; this is intentional to avoid false-positive churn flags on new signups.",
+  "business_context": "Feeds the Customer Success team's daily triage queue. A broken or delayed run means CS reps miss early churn signals for enterprise accounts, which the team has flagged as directly impacting quarterly retention numbers.",
+  "confidence": 0.74,
+  "confidence_level": "MEDIUM",
+  "knowledge_authors": ["priya.nair"],
+  "evidence": [
+    {
+      "type": "commit_message",
+      "url": "https://github.com/example-org/data-platform/commit/a3f2c1e",
+      "author": "priya.nair",
+      "timestamp": "2023-11-03T02:58:00Z",
+      "raw_excerpt": "fix: move churn_risk_scores run to 3am, avoid overlap with CRM vendor sync window that was corrupting reads",
+      "relevance_score": 0.8
+    },
+    {
+      "type": "code_comment",
+      "url": "https://github.com/example-org/data-platform/blob/main/models/analytics/churn_risk_scores.sql",
+      "author": null,
+      "timestamp": null,
+      "raw_excerpt": "-- score defaults to 0 (not null) for accounts <30 days old to avoid false-positive churn flags",
+      "relevance_score": 0.7
+    }
+  ],
+  "synthesized_at": "2026-08-02T10:41:00Z",
+  "written_to_datahub": false
+}

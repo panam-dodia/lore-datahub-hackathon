@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: theme("fontFamily.serif");
+  }
+}
+
+/* Dark-theme overrides for ReactFlow's default (light) chrome */
+.react-flow__controls-button {
+  background: #251f1a;
+  border-bottom: 1px solid #3a322b;
+  fill: #d9cbb4;
+}
+.react-flow__controls-button:hover {
+  background: #3a322b;
+}
+.react-flow__attribution {
+  background: transparent;
+}
+.react-flow__attribution a {
+  color: #6b5d4d;
+}
+
